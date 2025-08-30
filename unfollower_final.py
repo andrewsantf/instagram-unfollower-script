@@ -22,7 +22,6 @@ def parse_instagram_json(file_path):
         if isinstance(data, list):
             data_to_process = data
         elif isinstance(data, dict):
-            # Compatível com o formato de 'following.json'
             data_to_process = data.get('relationships_following', [])
         else:
             raise ValueError(f"Formato de ficheiro JSON não reconhecido em {os.path.basename(file_path)}")
@@ -67,7 +66,6 @@ def run_unfollow_process(username, password, users_to_unfollow, daily_limit):
     print("\nA iniciar o navegador para login manual...")
     try:
         with sync_playwright() as p:
-            # O NAVEGADOR AGORA É VISÍVEL PARA INTERVENÇÃO MANUAL
             browser = p.chromium.launch(headless=False)
             page = browser.new_page()
             
@@ -86,6 +84,7 @@ def run_unfollow_process(username, password, users_to_unfollow, daily_limit):
             print("2. Complete qualquer verificação de segurança (2FA), se aparecer.")
             print("3. QUANDO VIR A PÁGINA INICIAL DO INSTAGRAM, volte a este terminal.")
             input("4. Prima Enter aqui para continuar...")
+            
             # -----------------------------------------------------------
             
             print("\nA verificar o login e a extrair credenciais...")
@@ -224,4 +223,5 @@ if __name__ == "__main__":
     if confirm == 's':
         run_unfollow_process(user_login, user_pass, non_followers_final, user_limit)
     else:
+
         print("Operação cancelada.")
