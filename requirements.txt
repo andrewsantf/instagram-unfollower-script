@@ -1,0 +1,7 @@
+# Ficheiro: requirements.txt
+
+# Biblioteca para fazer os pedidos à API do Instagram
+requests==2.31.0
+
+# Biblioteca para automação do navegador (usada para o login inicial)
+playwright==1.42.0
